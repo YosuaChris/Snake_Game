@@ -34,14 +34,19 @@ class Snake:
         pygame.display.flip()
 
     def walk(self):
+
+        for i in range(self.length - 1, 0, -1):
+            self.x[i] = self.x[i - 1]
+            self.y[i] = self.y[i - 1]
+
         if self.direction == 'left':
-            self.x[0] -= 10
+            self.x[0] -= SIZE + 1
         if self.direction == 'right':
-            self.x[0] += 10
+            self.x[0] += SIZE + 1
         if self.direction == 'up':
-            self.y[0] -= 10
+            self.y[0] -= SIZE + 1
         if self.direction == 'down':
-            self.y[0] += 10
+            self.y[0] += SIZE + 1
 
         self.draw()
 
@@ -50,8 +55,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.surface = pygame.display.set_mode((1000, 500))
-        self.surface.fill((64, 107, 84))
-        self.snake = Snake(self.surface, 2)
+        self.snake = Snake(self.surface, 10)
         self.snake.draw()
 
     def run(self):
