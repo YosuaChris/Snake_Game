@@ -68,14 +68,24 @@ class Game:
     def __init__(self):
         pygame.init()
         self.surface = pygame.display.set_mode((1000, 500))
-        self.snake = Snake(self.surface, 2)
+        self.snake = Snake(self.surface, 5)
         self.snake.draw()
         self.apple = Apple(self.surface)
         self.apple.draw()
 
+    def collision(self, x1, x2, y1, y2):
+        if x1 >= x2 and x1 <= x2 + SIZE:
+            if y1 >= y2 and y1 <= y2 + SIZE:
+                return True
+
+        return False
+
     def play(self):
         self.snake.walk()
         self.apple.draw()
+
+        if self.collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
+            print("collision occured")
 
     def run(self):
         running = True
